@@ -1,27 +1,27 @@
 class UserExtension
 
-  # Call this function this way "generateRandomYopmailId(rand(8..20))".
+  # Call this function this way "generate_mail_id(length, domain)".
   # This function will generate a random Yopmail id and return it.
   def self.generate_mail_id(length, domain)
     yopmailid = (1..length).map { ('a'..'z').to_a[rand(26)] }.join+"@"+domain.to_s
     return yopmailid
   end
 
-  # Call this function this way "generateRandomString(rand(5..20))".
+  # Call this function this way "generate_string(length)".
   # This function will generate a random string and return it.
   def self.generate_string(length)
     str = (1..length).map { ('a'..'z').to_a[rand(26)] }.join
     return str
   end
 
-  # Call this function this way "generateTitle".
+  # Call this function this way "generate_title".
   # This function will generate a title and return it.
   def self.generate_title
     title = Faker::Name.prefix
     return title
   end
 
-  # Call this function this way "generateRandomName(rand(5..20))".
+  # Call this function this way "generate_name(length)".
   # This function will generate a random name and return it.
   def self.generate_name(length)
     str = (1..length-1).map { ('a'..'z').to_a[rand(26)] }.join
@@ -34,14 +34,14 @@ class UserExtension
     return str
   end
 
-  # Call this function this way "generateRandomNumber(1,10)".
+  # Call this function this way "generate_number(minrange, maxrange)".
   # This function will generate a random number and return it.
   def self.generate_number(minrange, maxrange)
     number = rand(minrange..maxrange)
     return number
   end
 
-  # Call this function this way "generateFutureDate(40)".
+  # Call this function this way "generate_future_date(days)".
   # This function will generate a future date and return it.
   def self.generate_future_date(days)
     date = Date.strptime(Date.today.to_s)
@@ -49,7 +49,7 @@ class UserExtension
     return date.strftime("%d-%m-%Y")
   end
 
-  # Call this function this way "generatePastDate(40)".
+  # Call this function this way "generate_past_date(days)".
   # This function will generate a past date and return it.
   def self.generate_past_date(days)
     date = Date.strptime(Date.today.to_s)
@@ -57,56 +57,56 @@ class UserExtension
     return date.strftime("%d-%m-%Y")
   end
 
-  # Call this function this way "generateAlphaNumericString(rand(5..20))".
+  # Call this function this way "generate_alphanumeric_string(length)".
   # This function will generate a random alpha-numeric string and return it.
   def self.generate_alphanumeric_string(length)
     str = (1..length).map { rand(36).to_s(36) }.join
     return str
   end
 
-  # Call this function this way "generateStreetAddress".
+  # Call this function this way "generate_street_address".
   # This function will generate a random street address and return it.
   def self.generate_street_address
     street_address = Faker::Address.street_address
     return street_address
   end
 
-  # Call this function this way "generateAddress".
+  # Call this function this way "generate_address".
   # This function will generate a random address and return it.
   def self.generate_address
     address = Faker::Address.secondary_address
     return address
   end
 
-  # Call this function this way "generatePhoneNumber".
+  # Call this function this way "generate_phone_number".
   # This function will generate a random phone number and return it.
   def self.generate_phone_number
     phone_number = rand(1000000000..9999999999)
     return phone_number
   end
 
-  # Call this function this way "genarateParagraph".
+  # Call this function this way "generate_paragraph".
   # This function will generate a paragraph and return it.
-  def self.genarate_paragraph
+  def self.generate_paragraph
     paragraph = Faker::Lorem.paragraphs.map { |i| i.to_s }.join(" ")
     return paragraph
   end
 
-  # Call this function this way "genarateWords(3)".
+  # Call this function this way "generate_words(number)".
   # This function will generate words and return it.
-  def self.genarate_words(number)
+  def self.generate_words(number)
     words = Faker::Lorem.words(number).map { |i| i.to_s }.join(" ")
     return words
   end
 
-  # Call this function this way "genarateSentence".
+  # Call this function this way "generate_sentence".
   # This function will generate a sentence and return it.
-  def self.genarate_sentence
+  def self.generate_sentence
     sentence = Faker::Lorem.sentence
     return sentence
   end
 
-  # Call this function this way "writeResultToCSV(report_file,test_id,test_case,result,comment="")".
+  # Call this function this way "write_result_to_csv(report_file, test_id, test_case, result, comment="")".
   # This function will write the result to .csv file.
   def self.write_result_to_csv(report_file, test_id, test_case, result, comment="")
     CSV.open(report_file, "ab") do |csv_file|
@@ -114,7 +114,7 @@ class UserExtension
     end
   end
 
-  # Call this function this way "writeLogstoTextFile(log_file,logs)".
+  # Call this function this way "write_logs_to_text_file(log_file, logs)".
   # This function will write the logs to .log file.
   def self.write_logs_to_text_file(log_file, logs)
     File.open(log_file, "a") do |txt_file|
@@ -134,7 +134,7 @@ class UserExtension
     end
   end
 
-  # Call this function this way "preRequisite(build_no,browser,timestamp)".
+  # Call this function this way "pre_requisite(build_no,browser,timestamp)".
   # This function will create the pre-requisites for the project.
   def self.pre_requisite(build_no, browser, timestamp)
     returning_array = Array.new

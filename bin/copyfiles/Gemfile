@@ -1,0 +1,10 @@
+source 'http://gemcutter.org'
+source 'http://gems.rubyforge.org'
+source 'http://rubygems.org'
+gem 'selenium-webdriver'
+gem 'mail'
+gem 'faker'
+gem 'nokogiri'
+gem 'selenium-client'
+gem 'headless'
+

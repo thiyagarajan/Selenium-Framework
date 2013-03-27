@@ -11,12 +11,12 @@ end
 
 def create_dir(dirname, directory_path, project_directory_path)
   Dir.chdir(directory_path)
-  if  (!File.exists?(dirname))
+  unless  (File.exists?(dirname))
     Dir.mkdir(dirname)
     print_path(dirname, directory_path, project_directory_path)
   end
   Dir.chdir(directory_path + "/" + dirname)
-  if  (!File.exists?(".gitignore"))
+  unless  (File.exists?(".gitignore"))
     FileUtils.touch ".gitignore"
     print_path(".gitignore", directory_path + "/" + dirname, project_directory_path)
   end
@@ -24,12 +24,12 @@ def create_dir(dirname, directory_path, project_directory_path)
 end
 
 def help_text
-  puts "Usage: \n\tframework new <PROJECT_PATH> [options]\n\nFramework options: \n\t-h, [--help]\t# Show this help message and quit\n\nRuntime options: \n\t-f, [--force]\t# Overwrite files that already exist"
+  puts "Usage: \n\tframework new <PROJECT_PATH> [options] \n\tframework update <PROJECT_PATH> \n\nFramework options: \n\t-h, [--help]\t# Show this help message and quit\n\nRuntime options: \n\t-f, [--force]\t# Overwrite files that already exist"
   exit
 end
 
 
-if ARGV[0] == nil || ARGV[1] == nil || ARGV[0] !='new' || ARGV[0] == '-h' || ARGV[0] == '--help'
+if ARGV[0] == nil || ARGV[1] == nil || (ARGV[0] !='new' && ARGV[0] !='update' ) || ARGV[0] == '-h' || ARGV[0] == '--help'
   help_text
 end
 force_flag = 0
@@ -42,12 +42,23 @@ if ARGV.length == 3
   end
 end
 
+update_flag = 0
+if ARGV[0] == 'update'
+  if ARGV.length == 2 && ARGV[1] != nil
+    update_flag = 1
+  else
+    help_text
+  end
+end
+
+
+
 project_name = ARGV[1]
 project_directory_path = Dir.pwd
 puts "\n"
 
 exist_flag = 1
-if ("true".casecmp(File.directory?(project_directory_path +"/"+ project_name).to_s)) == 0 && exist_flag == 1 && force_flag == 0
+if ("true".casecmp(File.directory?(project_directory_path +"/"+ project_name).to_s)) == 0 && exist_flag == 1 && force_flag == 0 && update_flag == 0
   puts "Project exist !!! What do you want to do? \n1. Overwrite the project\n2. Take backup and create new project\n3. Create project in existing directory\n4. Exit :\n\n"
   exist_flag = Readline.readline(":", true)
   exist_flag = exist_flag.to_i
@@ -56,7 +67,7 @@ else
 
 end
 
-if exist_flag == 1
+if exist_flag == 1 && update_flag == 0
   if File.exists?(project_name)
     FileUtils.rm_r(project_name)
     puts "Deleted the previous project...\n\n"
@@ -64,21 +75,29 @@ if exist_flag == 1
   puts "Creating new project as #{project_name}..."
   create_dir(project_name, project_directory_path, project_directory_path)
   Dir.chdir(project_directory_path + "/" + project_name)
+
   project_main_file = project_name + ".rb"
   FileUtils.touch project_main_file
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/project_file.rb"
+  destination = project_directory_path + "/" + project_name + "/" + project_main_file
+  FileUtils.copy_file(source,destination)
+  outdata = File.read(destination).gsub("Project", project_name.capitalize)
+  File.open(destination, 'w') do |out|
+    out << outdata
+  end
   print_path(project_main_file, project_directory_path + "/" + project_name, project_directory_path)
-  File.open(project_main_file, 'w') { |file| file.write("require './include.rb'"+"\n\n"+"class "+project_name.capitalize+" < Test::Unit::TestCase\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("def setup \nclient = Selenium::WebDriver::Remote::Http::Default.new \nclient.timeout = 120 # seconds \n$driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://<IP ADDRESS>:<PORT NUMBER>/wd/hub', :desired_capabilities => ':firefox')\n$base_url = 'http://<WEBSITE URL>'\n$driver.manage.timeouts.implicit_wait = 180\n@verification_errors = []"+"\n"+"end\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("def teardown \n$driver.quit \nassert_equal [],@verification_errors \nend\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("def verify(&blk) \nyield \nrescue Test::Unit::AssertionFailedError => ex \n@verification_errors << ex \nend\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("end") }
+
   FileUtils.touch "include.rb"
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
+  destination = project_directory_path + "/" + project_name + "/include.rb"
+  FileUtils.copy_file(source,destination)
   print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
-  File.open("include.rb", 'w') { |file| file.write("require 'selenium-framework'" +"\nrequire 'selenium-webdriver'"+"\n"+"require 'test/unit'"+"\n"+"require 'date'"+"\n"+"require 'csv'"+"\n"+"require 'faker'"+"\n") }
-  File.open("include.rb", 'a') { |file| file.write("require 'mail'"+"\n"+"require 'open-uri'"+"\n"+"require 'nokogiri'"+"\n"+"require 'uri'"+"\nrequire 'headless'"+"\n\n"+"# You can require all gems and libraries here") }
+
   FileUtils.touch "Gemfile"
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
+  destination = project_directory_path + "/" + project_name + "/Gemfile"
+  FileUtils.copy_file(source,destination)
   print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
-  File.open("Gemfile", 'a') { |file| file.write("source 'http://gemcutter.org'"+"\n"+"source 'http://gems.rubyforge.org'"+ "\nsource 'http://rubygems.org'"+"\nsource 'https://rubygems.org'"+"\n"+"gem 'selenium-webdriver'"+"\n"+"gem 'mail'"+"\n"+"gem 'faker'"+"\n"+"gem 'nokogiri'"+"\n"+"gem 'selenium-client'"+"\n\n"+"# You can add all gems required to be installed here") }
 
   Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
@@ -106,21 +125,30 @@ if exist_flag == 2
   puts "Creating new project as #{project_name}..."
   create_dir(project_name, project_directory_path, project_directory_path)
   Dir.chdir(project_directory_path + "/" + project_name)
+
   project_main_file = project_name + ".rb"
   FileUtils.touch project_main_file
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/project_file.rb"
+  destination = project_directory_path + "/" + project_name + "/" + project_main_file
+  FileUtils.copy_file(source,destination)
+  outdata = File.read(destination).gsub("Project", project_name.capitalize)
+  File.open(destination, 'w') do |out|
+    out << outdata
+  end
   print_path(project_main_file, project_directory_path + "/" + project_name, project_directory_path)
-  File.open(project_main_file, 'w') { |file| file.write("require './include.rb'"+"\n\n"+"class "+project_name.capitalize+"\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("def setup \nclient = Selenium::WebDriver::Remote::Http::Default.new \nclient.timeout = 120 # seconds \n$driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://<IP ADDRESS>:<PORT NUMBER>/wd/hub', :desired_capabilities => ':firefox')\n$base_url = 'http://<WEBSITE URL>'\n$driver.manage.timeouts.implicit_wait = 180\n@verification_errors = []"+"\n"+"end\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("def teardown \n$driver.quit \nassert_equal [],\n@verification_errors \nend\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("def verify(&blk) \nyield \nrescue Test::Unit::AssertionFailedError => ex \n@verification_errors << ex \nend\n\n") }
-  File.open(project_main_file, 'a') { |file| file.write("end") }
+
   FileUtils.touch "include.rb"
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
+  destination = project_directory_path + "/" + project_name + "/include.rb"
+  FileUtils.copy_file(source,destination)
   print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
-  File.open("include.rb", 'w') { |file| file.write("require 'selenium-webdriver'"+"\n"+"require 'test/unit'"+"\n"+"require 'date'"+"\n"+"require 'csv'"+"\n"+"require 'faker'"+"\n") }
-  File.open("include.rb", 'a') { |file| file.write("require 'mail'"+"\n"+"require 'open-uri'"+"\n"+"require 'nokogiri'"+"\n"+"require 'uri'"+"\n\n"+"# You can require all gems and libraries here") }
+
   FileUtils.touch "Gemfile"
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
+  destination = project_directory_path + "/" + project_name + "/Gemfile"
+  FileUtils.copy_file(source,destination)
   print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
-  File.open("Gemfile", 'a') { |file| file.write("source 'https://rubygems.org'"+"\n"+"gem 'selenium-webdriver'"+"\n"+"gem 'mail'"+"\n"+"gem 'faker'"+"\n"+"gem 'nokogiri'"+"\n"+"gem 'selenium-client'"+"\n\n"+"# You can add all gems required to be installed here") }
+
   Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
   internal_dir = ["libraries", "testcases", "logs", "reports", "screenshots"]
@@ -143,25 +171,30 @@ if exist_flag == 3
   if ("Y".casecmp confirm_flag) == 0 || ("YES".casecmp confirm_flag) == 0
     Dir.chdir(project_directory_path + "/" + project_name)
     project_main_file = project_name + ".rb"
-    if  (!File.exists?(project_main_file))
+    unless  (File.exists?(project_main_file))
       FileUtils.touch project_main_file
+      source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/project_file.rb"
+      destination = project_directory_path + "/" + project_name + "/" + project_main_file
+      FileUtils.copy_file(source,destination)
+      outdata = File.read(destination).gsub("Project", project_name.capitalize)
+      File.open(destination, 'w') do |out|
+        out << outdata
+      end
       print_path(project_main_file, project_directory_path + "/" + project_name, project_directory_path)
-      File.open(project_main_file, 'w') { |file| file.write("require './include.rb'"+"\n\n"+"class "+project_name.capitalize+"\n\n") }
-      File.open(project_main_file, 'a') { |file| file.write("def setup \nclient = Selenium::WebDriver::Remote::Http::Default.new \nclient.timeout = 120 # seconds \n$driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://<IP ADDRESS>:<PORT NUMBER>/wd/hub', :desired_capabilities => ':firefox')\n$base_url = 'http://<WEBSITE URL>'\n$driver.manage.timeouts.implicit_wait = 180\n@verification_errors = []"+"\n"+"end\n\n") }
-      File.open(project_main_file, 'a') { |file| file.write("def teardown \n$driver.quit \nassert_equal [],\n@verification_errors \nend\n\n") }
-      File.open(project_main_file, 'a') { |file| file.write("def verify(&blk) \nyield \nrescue Test::Unit::AssertionFailedError => ex \n@verification_errors << ex \nend\n\n") }
-      File.open(project_main_file, 'a') { |file| file.write("end") }
     end
-    if  (!File.exists?("include.rb"))
+    unless  (File.exists?("include.rb"))
       FileUtils.touch "include.rb"
+      source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
+      destination = project_directory_path + "/" + project_name + "/include.rb"
+      FileUtils.copy_file(source,destination)
       print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
-      File.open("include.rb", 'w') { |file| file.write("require 'selenium-webdriver'"+"\n"+"require 'test/unit'"+"\n"+"require 'date'"+"\n"+"require 'csv'"+"\n"+"require 'faker'"+"\n") }
-      File.open("include.rb", 'a') { |file| file.write("require 'mail'"+"\n"+"require 'open-uri'"+"\n"+"require 'nokogiri'"+"\n"+"require 'uri'"+"\n\n"+"# You can require all gems and libraries here") }
     end
-    if  (!File.exists?("Gemfile"))
+    unless  (File.exists?("Gemfile"))
       FileUtils.touch "Gemfile"
+      source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
+      destination = project_directory_path + "/" + project_name + "/Gemfile"
+      FileUtils.copy_file(source,destination)
       print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
-      File.open("Gemfile", 'a') { |file| file.write("source 'http://gemcutter.org'"+"\n"+"source 'http://gems.rubyforge.org'"+"\n"+"source 'http://rubygems.org'"+"\n"+"gem 'selenium-webdriver'"+"\n"+"gem 'mail'"+"\n"+"gem 'faker'"+"\n"+"gem 'nokogiri'"+"\n"+"gem 'selenium-client'"+"\n\n"+"# You can add all gems required to be installed here") }
     end
 
     Dir.chdir(project_directory_path)
@@ -187,3 +220,78 @@ if exist_flag == 4
   puts "Project exist !!! So exiting..."
   exit
 end
+
+if update_flag ==1
+  unless File.exists?(project_name)
+    puts "\n#{project_name} does not exist in current location...\nSo exiting ..."
+    exit
+  end
+  Dir.chdir(project_directory_path + "/" + project_name)
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
+  destination = "include.rb"
+  compare_result_1 =  FileUtils.compare_file(source, destination).to_s
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
+  destination = "Gemfile"
+  compare_result_2 =  FileUtils.compare_file(source, destination).to_s
+
+  if ("true".casecmp compare_result_1) == 0 && ("true".casecmp compare_result_2) == 0
+    puts "\nFramework for #{project_name} is already updated..."
+    puts "\nbundle install"
+    Dir.chdir(project_directory_path + "/" + project_name)
+    system("bundle install")
+    Dir.chdir(project_directory_path)
+    exit
+  else
+    puts "\nFramework for #{project_name} needs to be updated..."
+    source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
+    destination = "include.rb"
+    source_data = Array.new
+    source_data = IO.readlines(source)
+    destination_data = Array.new
+    destination_data = IO.readlines(destination)
+    source_data.each do |thing|
+      present_flag = destination_data.include? thing
+      present_flag = present_flag.to_s
+      if ("false".casecmp present_flag) == 0
+        #File.open(destination, 'a+') { |file| file.write(thing.to_s) }
+        f = File.open(destination, "r+")
+        lines = f.readlines
+        f.close
+        lines = [thing] + lines
+        output = File.new(destination, "w")
+        lines.each { |line| output.write line }
+        output.close
+      end
+    end
+    print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
+
+    source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
+    destination = "Gemfile"
+    source_data = Array.new
+    source_data = IO.readlines(source)
+    destination_data = Array.new
+    destination_data = IO.readlines(destination)
+    source_data.each do |thing|
+      present_flag = destination_data.include? thing
+      present_flag = present_flag.to_s
+      if ("false".casecmp present_flag) == 0
+        #File.open(destination, 'a+') { |file| file.write(thing.to_s) }
+        f = File.open(destination, "r+")
+        lines = f.readlines
+        f.close
+        lines = [thing] + lines
+        output = File.new(destination, "w")
+        lines.each { |line| output.write line }
+        output.close
+      end
+    end
+    print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
+
+    puts "\nFramework for #{project_name} is updated..."
+    puts "\nbundle install"
+    Dir.chdir(project_directory_path + "/" + project_name)
+    system("bundle install")
+    Dir.chdir(project_directory_path)
+  end
+end
+
