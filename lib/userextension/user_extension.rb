@@ -134,54 +134,12 @@ class UserExtension
     end
   end
 
-  # Call this function this way "pre_requisite(build_no,browser,timestamp)".
-  # This function will create the pre-requisites for the project.
-  def self.pre_requisite(build_no, browser, timestamp)
-    returning_array = Array.new
-    build_no = build_no.to_s
-    browser = browser.to_s
+
+  def self.current_timestamp
+    timestamp = Time.now
+    timestamp = timestamp.strftime("%d-%m-%Y-%H-%M-%S")
     timestamp = timestamp.to_s
-    store_path = Dir.pwd
-    Dir.chdir("screenshots")
-    Dir.mkdir(build_no)
-    Dir.chdir(build_no)
-    Dir.mkdir(browser +"_"+ timestamp)
-    Dir.chdir(browser +"_"+ timestamp)
-    screenshot_path = store_path + "/screenshots/" + build_no + "/" + browser +"_"+ timestamp + "/"
-    returning_array.push(screenshot_path)
-    Dir.chdir(store_path)
-
-    Dir.chdir("reports")
-    Dir.mkdir(build_no)
-    report_path = store_path + "/reports/" + build_no + "/"
-    Dir.chdir(report_path)
-    report_file = report_path + build_no +"_" + browser +"_"+ timestamp + ".csv"
-    FileUtils.touch(report_file)
-    CSV.open(report_file, "wb") do |csv_file|
-      csv_file << ["TEST_ID", "TEST_CASE", "RESULT", "COMMENTS"]
-    end
-    returning_array.push(report_file)
-    broken_links_report_file = report_path + build_no +"_broken_links_" + timestamp + ".csv"
-    FileUtils.touch(broken_links_report_file)
-    CSV.open(broken_links_report_file, "wb") do |csv_file|
-      csv_file << ["LINK", "RESPONSE", "COMMENTS"]
-    end
-    returning_array.push(broken_links_report_file)
-    Dir.chdir(store_path)
-
-    Dir.chdir("logs")
-    Dir.mkdir(build_no)
-    log_path = store_path + "/logs/" + build_no + "/"
-    Dir.chdir(log_path)
-    log_file = log_path + build_no +"_" + browser + "_" + timestamp + ".log"
-    FileUtils.touch(log_file)
-    File.open(log_file, "wb") do |txt_file|
-      txt_file.puts "LOGS WITH RESULTS"
-    end
-    returning_array.push(log_file)
-    Dir.chdir(store_path)
-
-    return returning_array
+    return timestamp
   end
 
 

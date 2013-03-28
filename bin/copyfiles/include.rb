@@ -9,4 +9,5 @@ require 'open-uri'
 require 'nokogiri'
 require 'uri'
 require 'headless'
+require 'fileutils'
 
