@@ -4,9 +4,11 @@ class Project < Test::Unit::TestCase
 
   @@browser = "firefox"
   @@build = 1
-  $screenshot_directory_path = PreRequisite.create_screenshot_directory_path(Dir.pwd.to_s,@@build,@@browser,UserExtension.current_timestamp)
-  $report_file = PreRequisite.create_report_file(Dir.pwd.to_s,@@build,@@browser,UserExtension.current_timestamp)
-  $log_file = PreRequisite.create_log_file(Dir.pwd.to_s,@@build,@@browser,UserExtension.current_timestamp)
+  $screenshot_directory_path = PreRequisite.create_screenshot_directory_path(Dir.pwd.to_s, @@build, @@browser, UserExtension.current_timestamp)
+  $report_file = PreRequisite.create_report_file(Dir.pwd.to_s, @@build, @@browser, UserExtension.current_timestamp)
+  $log_file = PreRequisite.create_log_file(Dir.pwd.to_s, @@build, @@browser, UserExtension.current_timestamp)
+
+  SeleniumConfig = YAML.load_file(Dir.pwd.to_s + '/Libraries/selenium-framework.yml')
 
   def setup
     client = Selenium::WebDriver::Remote::Http::Default.new
@@ -19,7 +21,7 @@ class Project < Test::Unit::TestCase
 
   def teardown
     $driver.quit
-    assert_equal [],@verification_errors
+    assert_equal [], @verification_errors
   end
 
   def verify(&blk)

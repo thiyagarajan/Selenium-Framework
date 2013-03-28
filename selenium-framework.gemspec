@@ -11,13 +11,13 @@ Gem::Specification.new do |s|
   s.description = %q{This gem is used for selenium automation framework}
   s.authors = ['Suyog Sakegaonkar, Thiyagarajan Veluchamy']
   s.email = 'suyogsakegaonkar@gmail.com, thiyagarajannv@gmail.com'
-  s.files = %w{lib/userextension/user_extension.rb lib/selenium-framework.rb lib/modules/login/login.rb bin/copyfiles/Gemfile bin/copyfiles/include.rb bin/copyfiles/project_file.rb lib/userextension/pre_requisite.rb}
+  s.files = ['lib/userextension/user_extension.rb', 'lib/selenium-framework.rb', 'lib/modules/login/login.rb', 'bin/copyfiles/Gemfile', 'bin/copyfiles/selenium-framework.yml', 'bin/copyfiles/include.rb', 'bin/copyfiles/project_file.rb', 'lib/userextension/pre_requisite.rb']
   s.require_path = 'lib'
   s.executables << 'testframe'
   s.post_install_message = 'Successfully get installed'
   s.description = 'Selenium Automation FrameWork'
   s.homepage = 'https://github.com/webonise/AutomationFramework'
-  s.extra_rdoc_files = %w{LICENSE README.md}
+  s.extra_rdoc_files = ['LICENSE', 'README.md']
   s.add_dependency(%q<bundler>)
   s.add_dependency(%q<selenium-webdriver>)
   s.add_dependency(%q<mail>)

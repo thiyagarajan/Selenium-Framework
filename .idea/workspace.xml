@@ -4,10 +4,16 @@
     <list default="true" id="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" name="Default" comment="" />
     <ignored path="AutomationFramework.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364430172227" ignored="false" />
-    <file path="/selenium-framework.gemspec" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364431716986" ignored="false" />
+    <file path="/Dummy.txt" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364434536082" ignored="false" />
+    <file path="/selenium-framework.gemspec" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364435378126" ignored="false" />
     <file path="/LICENSE" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364431880959" ignored="false" />
-    <file path="/a.dummy" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364431995653" ignored="false" />
+    <file path="/a.dummy" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364437328118" ignored="false" />
+    <file path="/selenium-framework.yml" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364434197562" ignored="false" />
+    <file path="/Gemfile" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364433923138" ignored="false" />
+    <file path="/selenium-framework.rb" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364434250811" ignored="false" />
+    <file path="/project_file.rb" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364436018298" ignored="false" />
+    <file path="/framework" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364435500561" ignored="false" />
+    <file path="/testframe" changelist="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" time="1364437284908" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,16 +33,7 @@
       <file leaf-file-name="project_file.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/copyfiles/project_file.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="23" selection-start="845" selection-end="845" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="framework" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bin/framework">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="4" selection-start="1483" selection-end="1483" vertical-scroll-proportion="0.0">
+            <state line="10" column="51" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -45,16 +42,52 @@
       <file leaf-file-name="selenium-framework.gemspec" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/selenium-framework.gemspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="20" selection-start="858" selection-end="858" vertical-scroll-proportion="0.0">
+            <state line="13" column="167" selection-start="676" selection-end="676" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LICENSE" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/LICENSE">
+      <file leaf-file-name="include.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/copyfiles/include.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="61" selection-start="911" selection-end="911" vertical-scroll-proportion="0.49571183">
+            <state line="12" column="17" selection-start="246" selection-end="246" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/copyfiles/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="13" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testframe" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/testframe">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="128" column="55" selection-start="4644" selection-end="4644" vertical-scroll-proportion="-0.94678897">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="selenium-framework.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/copyfiles/selenium-framework.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="32" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="selenium-framework.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/selenium-framework.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="31" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -78,8 +111,15 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/selenium-framework.gemspec" />
         <option value="$PROJECT_DIR$/LICENSE" />
+        <option value="$PROJECT_DIR$/bin/copyfiles/selenium-framework.yml" />
+        <option value="$PROJECT_DIR$/lib/selenium-framework.rb" />
+        <option value="$PROJECT_DIR$/bin/copyfiles/include.rb" />
+        <option value="$PROJECT_DIR$/bin/copyfiles/Gemfile" />
+        <option value="$PROJECT_DIR$/selenium-framework.gemspec" />
+        <option value="$PROJECT_DIR$/bin/framework" />
+        <option value="$PROJECT_DIR$/bin/copyfiles/project_file.rb" />
+        <option value="$PROJECT_DIR$/bin/testframe" />
       </list>
     </option>
   </component>
@@ -143,20 +183,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AutomationFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AutomationFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="bin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -186,8 +212,27 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CapistranoRunConfigurationType" factoryName="Capistrano">
+      <module name="" />
+      <CAPISTRANO_RUN_CONFIGURATION NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <CAPISTRANO_RUN_CONFIGURATION NAME="WORK DIR" VALUE="" />
+      <CAPISTRANO_RUN_CONFIGURATION NAME="SHOULD_USE_SDK" VALUE="false" />
+      <CAPISTRANO_RUN_CONFIGURATION NAME="ALTERN_SDK_NAME" VALUE="" />
+      <CAPISTRANO_RUN_CONFIGURATION NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <CAPISTRANO_RUN_CONFIG_SETTINGS_ID NAME="CAPISTRANO_TASK_NAME" VALUE="" />
+      <CAPISTRANO_RUN_CONFIG_SETTINGS_ID NAME="CAPISTRANO_TASK_ARGS" VALUE="" />
+      <CAPISTRANO_RUN_CONFIG_SETTINGS_ID NAME="CAPISTRANO_STAGE" VALUE="" />
+      <method />
+    </configuration>
     <configuration default="true" type="RSpecRunConfigurationType" factoryName="RSpec">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="" />
@@ -212,6 +257,22 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="AutomationFramework" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="true" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="ruby-1.9.3-p392" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method />
     </configuration>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest">
@@ -239,6 +300,24 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="90c89fc6-d3a8-4897-9f83-f0b8b0deb3c8" name="Default" comment="" />
@@ -326,30 +405,65 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bin/copyfiles/project_file.rb">
+    <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="23" selection-start="845" selection-end="845" vertical-scroll-proportion="0.0">
+        <state line="9" column="34" selection-start="465" selection-end="465" vertical-scroll-proportion="0.26243567">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/framework">
+    <entry file="file://$PROJECT_DIR$/bin/copyfiles/include.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="4" selection-start="1483" selection-end="1483" vertical-scroll-proportion="0.0">
+        <state line="12" column="17" selection-start="246" selection-end="246" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Ruby200-x64/lib/ruby/2.0.0/tmpdir.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="6" selection-start="176" selection-end="176" vertical-scroll-proportion="-0.104631215">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/selenium-framework.gemspec">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="20" selection-start="858" selection-end="858" vertical-scroll-proportion="0.0">
+        <state line="13" column="167" selection-start="676" selection-end="676" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
+    <entry file="file://$PROJECT_DIR$/bin/copyfiles/selenium-framework.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="61" selection-start="911" selection-end="911" vertical-scroll-proportion="0.49571183">
+        <state line="4" column="32" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/selenium-framework.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="31" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/copyfiles/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/copyfiles/project_file.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="51" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/testframe">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="55" selection-start="4644" selection-end="4644" vertical-scroll-proportion="-0.94678897">
           <folding />
         </state>
       </provider>

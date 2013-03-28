@@ -10,4 +10,5 @@ require 'nokogiri'
 require 'uri'
 require 'headless'
 require 'fileutils'
+require 'ostruct'
 

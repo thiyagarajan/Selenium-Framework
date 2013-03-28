@@ -4,9 +4,9 @@ require 'readline'
 
 
 def print_path(filename, filepath, project_directory_path)
-  path = filepath +"/"+ filename
+  path = filepath +'/'+ filename
   path = path.to_s
-  puts "create " + path.split(project_directory_path.to_s)[1].to_s
+  puts 'create ' + path.split(project_directory_path.to_s)[1].to_s
 end
 
 def create_dir(dirname, directory_path, project_directory_path)
@@ -15,10 +15,10 @@ def create_dir(dirname, directory_path, project_directory_path)
     Dir.mkdir(dirname)
     print_path(dirname, directory_path, project_directory_path)
   end
-  Dir.chdir(directory_path + "/" + dirname)
-  unless  (File.exists?(".gitignore"))
-    FileUtils.touch ".gitignore"
-    print_path(".gitignore", directory_path + "/" + dirname, project_directory_path)
+  Dir.chdir(directory_path + '/' + dirname)
+  unless  (File.exists?('.gitignore'))
+    FileUtils.touch '.gitignore'
+    print_path('.gitignore', directory_path + '/' + dirname, project_directory_path)
   end
   Dir.chdir(directory_path)
 end
@@ -29,7 +29,7 @@ def help_text
 end
 
 
-if ARGV[0] == nil || ARGV[1] == nil || (ARGV[0] !='new' && ARGV[0] !='update' ) || ARGV[0] == '-h' || ARGV[0] == '--help'
+if ARGV[0] == nil || ARGV[1] == nil || (ARGV[0] !='new' && ARGV[0] !='update') || ARGV[0] == '-h' || ARGV[0] == '--help'
   help_text
 end
 force_flag = 0
@@ -50,7 +50,6 @@ if ARGV[0] == 'update'
     help_text
   end
 end
-
 
 
 project_name = ARGV[1]
@@ -80,7 +79,7 @@ if exist_flag == 1 && update_flag == 0
   FileUtils.touch project_main_file
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/project_file.rb"
   destination = project_directory_path + "/" + project_name + "/" + project_main_file
-  FileUtils.copy_file(source,destination)
+  FileUtils.copy_file(source, destination)
   outdata = File.read(destination).gsub("Project", project_name.capitalize)
   File.open(destination, 'w') do |out|
     out << outdata
@@ -90,23 +89,32 @@ if exist_flag == 1 && update_flag == 0
   FileUtils.touch "include.rb"
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
   destination = project_directory_path + "/" + project_name + "/include.rb"
-  FileUtils.copy_file(source,destination)
+  FileUtils.copy_file(source, destination)
   print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
 
   FileUtils.touch "Gemfile"
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
   destination = project_directory_path + "/" + project_name + "/Gemfile"
-  FileUtils.copy_file(source,destination)
+  FileUtils.copy_file(source, destination)
   print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
 
   Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
-  internal_dir = ["libraries", "testcases", "logs", "reports", "screenshots"]
+  internal_dir = ['libraries', 'testcases', 'logs', 'reports', 'screenshots','config']
   directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
   for dir_counter in 0..internal_dir.length-1
     create_dir(internal_dir[dir_counter], directory_path, project_directory_path)
   end
+
+  Dir.chdir('config')
+  FileUtils.touch 'selenium-framework.yml'
+  source = File.expand_path File.dirname(__FILE__).to_s + '/copyfiles/selenium-framework.yml'
+  destination = project_directory_path + '/' + project_name + '/config/selenium-framework.yml'
+  FileUtils.copy_file(source, destination)
+  Dir.chdir(project_directory_path)
+  print_path('config/selenium-framework.yml', project_directory_path + '/' + project_name, project_directory_path)
+
   puts "\nFramework for #{project_name} is created..."
   puts "\nbundle install"
   Dir.chdir(project_directory_path + "/" + project_name)
@@ -116,7 +124,7 @@ end
 
 if exist_flag == 2
   timestamp = Time.now
-  timestamp = timestamp.strftime("%d-%m-%Y-%H-%M-%S")
+  timestamp = timestamp.strftime('%d-%m-%Y-%H-%M-%S')
   timestamp = timestamp.to_s
   old_prject_name = project_name
   new_project_name = project_name+'_'+timestamp
@@ -130,7 +138,7 @@ if exist_flag == 2
   FileUtils.touch project_main_file
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/project_file.rb"
   destination = project_directory_path + "/" + project_name + "/" + project_main_file
-  FileUtils.copy_file(source,destination)
+  FileUtils.copy_file(source, destination)
   outdata = File.read(destination).gsub("Project", project_name.capitalize)
   File.open(destination, 'w') do |out|
     out << outdata
@@ -140,23 +148,32 @@ if exist_flag == 2
   FileUtils.touch "include.rb"
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
   destination = project_directory_path + "/" + project_name + "/include.rb"
-  FileUtils.copy_file(source,destination)
+  FileUtils.copy_file(source, destination)
   print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
 
   FileUtils.touch "Gemfile"
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
   destination = project_directory_path + "/" + project_name + "/Gemfile"
-  FileUtils.copy_file(source,destination)
+  FileUtils.copy_file(source, destination)
   print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
 
   Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
-  internal_dir = ["libraries", "testcases", "logs", "reports", "screenshots"]
+  internal_dir = ['libraries', 'testcases', 'logs', 'reports', 'screenshots','config']
   directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
   for dir_counter in 0..internal_dir.length-1
     create_dir(internal_dir[dir_counter], directory_path, project_directory_path)
   end
+
+  Dir.chdir('config')
+  FileUtils.touch 'selenium-framework.yml'
+  source = File.expand_path File.dirname(__FILE__).to_s + '/copyfiles/selenium-framework.yml'
+  destination = project_directory_path + '/' + project_name + '/config/selenium-framework.yml'
+  FileUtils.copy_file(source, destination)
+  Dir.chdir(project_directory_path)
+  print_path('config/selenium-framework.yml', project_directory_path + '/' + project_name, project_directory_path)
+
   puts "\nFramework for #{project_name} is created..."
   puts "\nbundle install"
   Dir.chdir(project_directory_path + "/" + project_name)
@@ -175,36 +192,48 @@ if exist_flag == 3
       FileUtils.touch project_main_file
       source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/project_file.rb"
       destination = project_directory_path + "/" + project_name + "/" + project_main_file
-      FileUtils.copy_file(source,destination)
+      FileUtils.copy_file(source, destination)
       outdata = File.read(destination).gsub("Project", project_name.capitalize)
       File.open(destination, 'w') do |out|
         out << outdata
       end
       print_path(project_main_file, project_directory_path + "/" + project_name, project_directory_path)
     end
+
     unless  (File.exists?("include.rb"))
       FileUtils.touch "include.rb"
       source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
       destination = project_directory_path + "/" + project_name + "/include.rb"
-      FileUtils.copy_file(source,destination)
+      FileUtils.copy_file(source, destination)
       print_path("include.rb", project_directory_path + "/" + project_name, project_directory_path)
     end
     unless  (File.exists?("Gemfile"))
       FileUtils.touch "Gemfile"
       source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
       destination = project_directory_path + "/" + project_name + "/Gemfile"
-      FileUtils.copy_file(source,destination)
+      FileUtils.copy_file(source, destination)
       print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
     end
 
     Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
-    internal_dir = ["libraries", "testcases", "logs", "reports", "screenshots"]
+    internal_dir = ['libraries', 'testcases', 'logs', 'reports', 'screenshots','config']
     directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
     for dir_counter in 0..internal_dir.length-1
       create_dir(internal_dir[dir_counter], directory_path, project_directory_path)
     end
+
+    unless  (File.exists?('/config/selenium-framework.yml'))
+      Dir.chdir('config')
+      FileUtils.touch 'selenium-framework.yml'
+      source = File.expand_path File.dirname(__FILE__).to_s + '/copyfiles/selenium-framework.yml'
+      destination = project_directory_path + '/' + project_name + '/config/selenium-framework.yml'
+      FileUtils.copy_file(source, destination)
+      Dir.chdir(project_directory_path)
+      print_path('config/selenium-framework.yml', project_directory_path + '/' + project_name, project_directory_path)
+    end
+
     puts "\nFramework for #{project_name} is created..."
     puts "\nbundle install"
     Dir.chdir(project_directory_path + "/" + project_name)
@@ -229,12 +258,15 @@ if update_flag ==1
   Dir.chdir(project_directory_path + "/" + project_name)
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/include.rb"
   destination = "include.rb"
-  compare_result_1 =  FileUtils.compare_file(source, destination).to_s
+  compare_result_1 = FileUtils.compare_file(source, destination).to_s
   source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/Gemfile"
   destination = "Gemfile"
-  compare_result_2 =  FileUtils.compare_file(source, destination).to_s
+  compare_result_2 = FileUtils.compare_file(source, destination).to_s
+  source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/selenium-framework.yml"
+  destination = "/config/selenium-framework.yml"
+  compare_result_3 = FileUtils.compare_file(source, destination).to_s
 
-  if ("true".casecmp compare_result_1) == 0 && ("true".casecmp compare_result_2) == 0
+  if ("true".casecmp compare_result_1) == 0 && ("true".casecmp compare_result_2) == 0 && ("true".casecmp compare_result_3) == 0
     puts "\nFramework for #{project_name} is already updated..."
     puts "\nbundle install"
     Dir.chdir(project_directory_path + "/" + project_name)
@@ -286,6 +318,28 @@ if update_flag ==1
       end
     end
     print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
+
+    source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/selenium-framework.yml"
+    destination = "/config/selenium-framework.yml"
+    source_data = Array.new
+    source_data = IO.readlines(source)
+    destination_data = Array.new
+    destination_data = IO.readlines(destination)
+    source_data.each do |thing|
+      present_flag = destination_data.include? thing
+      present_flag = present_flag.to_s
+      if ("false".casecmp present_flag) == 0
+        #File.open(destination, 'a+') { |file| file.write(thing.to_s) }
+        f = File.open(destination, "r+")
+        lines = f.readlines
+        f.close
+        lines = [thing] + lines
+        output = File.new(destination, "w")
+        lines.each { |line| output.write line }
+        output.close
+      end
+    end
+    print_path("/config/selenium-framework.yml", project_directory_path + "/" + project_name, project_directory_path)
 
     puts "\nFramework for #{project_name} is updated..."
     puts "\nbundle install"
