@@ -3,10 +3,10 @@ require './include.rb'
 class Project < Test::Unit::TestCase
 
   @@browser = "firefox"
-  @@build = 1
-  $screenshot_directory_path = PreRequisite.create_screenshot_directory_path(Dir.pwd.to_s, @@build, @@browser, UserExtension.current_timestamp)
-  $report_file = PreRequisite.create_report_file(Dir.pwd.to_s, @@build, @@browser, UserExtension.current_timestamp)
-  $log_file = PreRequisite.create_log_file(Dir.pwd.to_s, @@build, @@browser, UserExtension.current_timestamp)
+  build_path = PreRequisite.create_build_structure(Dir.pwd)
+  $screenshot_directory_path = PreRequisite.create_screenshot_directory_path(Dir.pwd.to_s, build_path)
+  $report_file = PreRequisite.create_report_file(Dir.pwd.to_s, build_path)
+  $log_file = PreRequisite.create_log_file(Dir.pwd.to_s, build_path)
 
   SeleniumConfig = YAML.load_file(Dir.pwd.to_s + '/Libraries/selenium-framework.yml')
 

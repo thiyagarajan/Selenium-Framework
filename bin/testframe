@@ -28,6 +28,7 @@ def help_text
   exit
 end
 
+internal_dir = ['libraries', 'testcases','config','builds']
 
 if ARGV[0] == nil || ARGV[1] == nil || (ARGV[0] !='new' && ARGV[0] !='update') || ARGV[0] == '-h' || ARGV[0] == '--help'
   help_text
@@ -100,7 +101,7 @@ if exist_flag == 1 && update_flag == 0
 
   Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
-  internal_dir = ['libraries', 'testcases', 'logs', 'reports', 'screenshots','config']
+#  internal_dir = ['libraries', 'testcases','config','builds']
   directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
   for dir_counter in 0..internal_dir.length-1
@@ -159,7 +160,7 @@ if exist_flag == 2
 
   Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
-  internal_dir = ['libraries', 'testcases', 'logs', 'reports', 'screenshots','config']
+#  internal_dir = ['libraries', 'testcases','config','builds']
   directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
   for dir_counter in 0..internal_dir.length-1
@@ -217,7 +218,7 @@ if exist_flag == 3
 
     Dir.chdir(project_directory_path)
 # internal_dir -- array for storing framework directory names
-    internal_dir = ['libraries', 'testcases', 'logs', 'reports', 'screenshots','config']
+#    internal_dir = ['libraries', 'testcases','config','builds']
     directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
     for dir_counter in 0..internal_dir.length-1

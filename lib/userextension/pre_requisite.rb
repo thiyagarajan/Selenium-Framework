@@ -1,46 +1,66 @@
 class PreRequisite
+  private
+  def self.create_dir_inside_build(dirname, directory_path)
+    Dir.chdir(directory_path)
+    unless  (File.exists?(dirname))
+      Dir.mkdir(dirname)
+    end
+    Dir.chdir(directory_path + '/' + dirname)
+    unless  (File.exists?('.gitignore'))
+      FileUtils.touch '.gitignore'
+    end
+    Dir.chdir(directory_path)
+  end
 
-  def self.create_screenshot_directory_path(store_path, build_no, browser, timestamp)
-    build_no = build_no.to_s
-    browser = browser.to_s
-    timestamp = timestamp.to_s
-    Dir.chdir(store_path +"/screenshots/")
-    Dir.mkdir(build_no)
-    Dir.chdir(build_no)
-    Dir.mkdir(browser +"_"+ timestamp)
-    Dir.chdir(browser +"_"+ timestamp)
+  public
+  def self.create_build_structure(store_path)
+    build_path = store_path + "/builds/"
+    Dir.chdir(build_path)
+    if Dir.entries(build_path).size == 2
+      build_number = "0"
+      Dir.mkdir(build_number)
+    else
+      dir_list_new = []
+      dir_list = Dir.entries(build_path)
+      dir_list.delete(".")
+      dir_list.delete("..")
+      dir_list.map {|a| dir_list_new.push(a.to_i) }
+      build_number = dir_list_new.max + 1
+      build_number = build_number.to_s
+      Dir.mkdir(build_number)
+    end
+    Dir.chdir(build_number)
+    build_number_path = build_path + build_number + "/"
+    build_internal_dir = ['screenshots','logs','reports']
+    for dir_counter in 0..build_internal_dir.length-1
+      create_dir_inside_build(build_internal_dir[dir_counter], build_number_path)
+    end
+    Dir.chdir(store_path)
+    return build_number_path
+  end
+
+  def self.create_screenshot_directory_path(store_path, build_number_path)
+    Dir.chdir(build_number_path + "screenshots/")
     FileUtils.touch ".gitignore"
-    screenshot_path = store_path + "/screenshots/" + build_no + "/" + browser +"_"+ timestamp + "/"
+    screenshot_path = build_number_path + "screenshots/"
     Dir.chdir(store_path)
     return screenshot_path
   end
 
-  def self.create_report_file(store_path, build_no, browser, timestamp)
-    build_no = build_no.to_s
-    browser = browser.to_s
-    timestamp = timestamp.to_s
-    Dir.chdir(store_path +"/reports/")
-    Dir.mkdir(build_no)
-    report_path = store_path + "/reports/" + build_no + "/"
-    Dir.chdir(report_path)
-    report_file = report_path + build_no +"_" + browser +"_"+ timestamp + ".csv"
+  def self.create_report_file(store_path, build_number_path)
+    Dir.chdir(build_number_path + "reports/")
+    report_file = build_number_path + "reports/" + "report.csv"
     FileUtils.touch(report_file)
     CSV.open(report_file, "wb") do |csv_file|
-      csv_file << ["TEST_ID", "TEST_CASE", "RESULT", "COMMENTS"]
+      csv_file << ["BROWSER", "TEST_ID", "TEST_CASE", "RESULT"]
     end
     Dir.chdir(store_path)
     return report_file
   end
 
-  def self.create_log_file(store_path, build_no, browser, timestamp)
-    build_no = build_no.to_s
-    browser = browser.to_s
-    timestamp = timestamp.to_s
-    Dir.chdir(store_path +"/logs/")
-    Dir.mkdir(build_no)
-    log_path = store_path + "/logs/" + build_no + "/"
-    Dir.chdir(log_path)
-    log_file = log_path + build_no +"_" + browser + "_" + timestamp + ".log"
+  def self.create_log_file(store_path, build_number_path)
+    Dir.chdir(build_number_path + "logs/")
+    log_file = build_number_path + "logs/" + "execution.log"
     FileUtils.touch(log_file)
     File.open(log_file, "wb") do |txt_file|
       txt_file.puts "LOGS WITH RESULTS"
