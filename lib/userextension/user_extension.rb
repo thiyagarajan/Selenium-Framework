@@ -134,7 +134,8 @@ class UserExtension
     end
   end
 
-
+  # Call this function this way "current_timestamp".
+  # This function will return the current timestamp.
   def self.current_timestamp
     timestamp = Time.now
     timestamp = timestamp.strftime("%d-%m-%Y-%H-%M-%S")

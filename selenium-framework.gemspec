@@ -4,14 +4,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-framework}
-  s.version = '1.0.1'
-  s.date = %q{2013-04-05}
+  s.version = '1.0.4'
+  s.date = %q{2013-04-08}
   s.default_executable = %q{testframe}
   s.summary = %q{This gem is used for selenium automation framework}
   s.description = %q{This gem is used for selenium automation framework}
   s.authors = ['Suyog Sakegaonkar, Thiyagarajan Veluchamy']
   s.email = 'suyogsakegaonkar@gmail.com, thiyagarajannv@gmail.com'
-  s.files = ['lib/userextension/user_extension.rb', 'lib/selenium-framework.rb', 'lib/modules/login/login.rb', 'bin/copyfiles/Gemfile', 'bin/copyfiles/selenium-framework.yml', 'bin/copyfiles/include.rb', 'bin/copyfiles/project_file.rb', 'lib/userextension/pre_requisite.rb']
+  s.files = ['lib/userextension/user_extension.rb', 'lib/selenium-framework.rb', 'lib/modules/login/login.rb', 'bin/copyfiles/Gemfile', 'bin/copyfiles/selenium-framework.yml', 'bin/copyfiles/include.rb', 'bin/copyfiles/project_file.rb', 'lib/userextension/pre_requisite.rb','lib/userextension/utilities.rb']
   s.require_path = 'lib'
   s.executables << 'testframe'
   s.post_install_message = 'Successfully get installed'
