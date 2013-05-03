@@ -4,8 +4,8 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-framework}
-  s.version = '1.0.4'
-  s.date = %q{2013-04-08}
+  s.version = '1.0.5'
+  s.date = %q{2013-05-03}
   s.default_executable = %q{testframe}
   s.summary = %q{This gem is used for selenium automation framework}
   s.description = %q{This gem is used for selenium automation framework}

@@ -166,7 +166,7 @@ class UserExtension
   end
 
 
-  def self.record_video_stop_and_save(headless_obj,filename)
+  def self.record_video_stop_and_save(headless_obj, filename)
     os = RUBY_PLATFORM
     if os.include? "linux"
       headless_obj.video.stop_and_save(filename)
@@ -185,13 +185,35 @@ class UserExtension
     end
   end
 
-
-  def self.capture_screenshot(selenium_diver,filename)
+  def self.capture_screenshot(selenium_diver, filename)
     browser_name = selenium_diver.capabilities.browser_name
     unless (browser_name.include? "safari")
       selenium_diver.save_screenshot filename
     else
       puts "#{browser_name} does not support for capturing screenshot !!!"
+    end
+  end
+
+  def self.dob_year(yrs_old)
+    current_year = Time.now.year
+    year= rand(current_year-100..current_year-yrs_old)
+  end
+
+  def self.dob_month
+    month = %w{January February March April May June July August September October November December}.sample
+  end
+
+  def self.dob_date(month, year)
+    if month=='January' || month=='March' || month=='May' || month =='July' || month == 'August' || month=='October' || month == 'December'
+      day = rand(1..31)
+    elsif month== 'Febaury'
+      if ((year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0))
+        day = rand(1..29)
+      else
+        day = rand(1..28)
+      end
+    else
+      day = rand(1..30)
     end
   end
 
