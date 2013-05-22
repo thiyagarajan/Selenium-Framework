@@ -12,13 +12,13 @@ class Project < Test::Unit::TestCase
   def setup
     client = Selenium::WebDriver::Remote::Http::Default.new
     client.timeout = 120 # seconds
-    if $SeleniumConfig.mode == "remote"
-      $driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://'+ $SeleniumConfig.host+':4444/wd/hub', :desired_capabilities => $SeleniumConfig.local_browser.to_sym)
+    if $SeleniumConfig['mode'] == 'remote'
+      $driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://'+ $SeleniumConfig['host']+':4444/wd/hub', :desired_capabilities => $SeleniumConfig['local_browser'].to_sym)
     else
-      $driver = Selenium::WebDriver.for $SeleniumConfig.local_browser.to_sym
+      $driver = Selenium::WebDriver.for $SeleniumConfig['local_browser'].to_sym
     end
-    $base_url = $SeleniumConfig.base_url
-    $adminbase_url = $SeleniumConfig.adminbase_url
+    $base_url = $SeleniumConfig['base_url']
+    $adminbase_url = $SeleniumConfig['adminbase_url']
     $driver.manage.timeouts.implicit_wait = 180
     @verification_errors = []
   end
@@ -26,7 +26,7 @@ class Project < Test::Unit::TestCase
   # Write the testcases here:
 
   def test_zipandmail
-    Utility.email('from_email_id', 'to_email_id', 'cc_email_id', 'project_name', $report_file)
+    Utility.email($SeleniumConfig['mail_from'], $SeleniumConfig['mail_to'], $SeleniumConfig['mail_cc'], $SeleniumConfig['application_name'], $report_file)
   end
 
   def teardown

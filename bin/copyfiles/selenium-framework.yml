@@ -5,3 +5,7 @@ application_name: <application name>
 local_browser: <firefox> OR <chrome> OR <safari> OR <ie>
 browsers: <firefox>, <chrome>, <safari>, <ie>
 host: <remote ip address>
+
+mail_to:
+mail_from:
+mail_cc:
