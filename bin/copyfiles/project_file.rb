@@ -2,25 +2,32 @@ require './include.rb'
 
 class Project < Test::Unit::TestCase
 
-  @@browser = "firefox"
   build_path = PreRequisite.create_build_structure(Dir.pwd)
   $screenshot_directory_path = PreRequisite.create_screenshot_directory_path(Dir.pwd.to_s, build_path)
   $report_file = PreRequisite.create_report_file(Dir.pwd.to_s, build_path)
   $log_file = PreRequisite.create_log_file(Dir.pwd.to_s, build_path)
-
-  SeleniumConfig = YAML.load_file(Dir.pwd.to_s + '/config/selenium-framework.yml')
+  $SeleniumConfig = YAML.load_file(Dir.pwd.to_s + '/config/selenium-framework.yml')
+  $app_path = Dir.pwd
 
   def setup
     client = Selenium::WebDriver::Remote::Http::Default.new
     client.timeout = 120 # seconds
-    #$driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://<IP ADDRESS>:<PORT NUMBER>/wd/hub', :desired_capabilities => @@browser.to_sym)
-	$driver = Selenium::WebDriver.for @@browser.to_sym
-    $base_url = 'http://<WEBSITE URL>'
+    if $SeleniumConfig.mode == "remote"
+      $driver = Selenium::WebDriver.for(:remote, :http_client => client, :url => 'http://'+ $SeleniumConfig.host+':4444/wd/hub', :desired_capabilities => $SeleniumConfig.local_browser.to_sym)
+    else
+      $driver = Selenium::WebDriver.for $SeleniumConfig.local_browser.to_sym
+    end
+    $base_url = $SeleniumConfig.base_url
+    $adminbase_url = $SeleniumConfig.adminbase_url
     $driver.manage.timeouts.implicit_wait = 180
     @verification_errors = []
   end
 
   # Write the testcases here:
+
+  def test_zipandmail
+    Utility.email('from_email_id', 'to_email_id', 'cc_email_id', 'project_name', $report_file)
+  end
 
   def teardown
     $driver.quit

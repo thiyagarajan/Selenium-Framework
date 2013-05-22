@@ -4,25 +4,26 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-framework}
-  s.version = '1.0.5'
-  s.date = %q{2013-05-03}
+  s.version = '1.0.10'
+  s.date = %q{2013-05-22}
   s.default_executable = %q{testframe}
   s.summary = %q{This gem is used for selenium automation framework}
   s.description = %q{This gem is used for selenium automation framework}
   s.authors = ['Suyog Sakegaonkar, Thiyagarajan Veluchamy']
-  s.email = 'suyogsakegaonkar@gmail.com, thiyagarajannv@gmail.com'
-  s.files = ['lib/userextension/user_extension.rb', 'lib/selenium-framework.rb', 'lib/modules/login/login.rb', 'bin/copyfiles/Gemfile', 'bin/copyfiles/selenium-framework.yml', 'bin/copyfiles/include.rb', 'bin/copyfiles/project_file.rb', 'lib/userextension/pre_requisite.rb','lib/userextension/utilities.rb']
+  s.email = 'suyogsakegaonka@gmail.com, thiyagarajannv@gmail.com'
+  s.files = ['lib/userextension/user_extension.rb', 'lib/selenium-framework.rb', 'bin/copyfiles/Gemfile', 'bin/copyfiles/selenium-framework.yml', 'bin/copyfiles/include.rb', 'bin/copyfiles/project_file.rb', 'lib/userextension/pre_requisite.rb', 'lib/userextension/utilities.rb']
   s.require_path = 'lib'
   s.executables << 'testframe'
-  s.post_install_message = 'Successfully get installed'
+  s.post_install_message = 'Successfully Selenium Framework get installed'
   s.description = 'Selenium Automation FrameWork'
   s.homepage = 'https://github.com/webonise/AutomationFramework'
   s.extra_rdoc_files = ['LICENSE', 'README.md']
-  s.add_dependency(%q<bundler>)
-  s.add_dependency(%q<selenium-webdriver>)
-  s.add_dependency(%q<mail>)
-  s.add_dependency(%q<faker>)
-  s.add_dependency(%q<nokogiri>)
-  s.add_dependency(%q<selenium-client>)
-  s.add_dependency(%q<pry>)
+  s.add_dependency 'bundler', '>= 1.3.0'
+  s.add_dependency 'selenium-webdriver', '>= 2.32.1'
+  s.add_dependency 'mail', '>= 2.5.4'
+  s.add_dependency 'faker', '>= 1.1.2'
+  s.add_dependency 'nokogiri', '>= 1.5.9'
+  s.add_dependency 'selenium-client', '>= 1.2.18'
+  s.add_dependency 'headless', '>= 1.0.1'
+  s.add_dependency 'random-word', '>=1.3.0'
 end

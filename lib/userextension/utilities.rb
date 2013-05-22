@@ -15,7 +15,7 @@ class Utility
     FileUtils.rm_rf(dir) if remove_after
   end
 
-  def self.email(email_id, build_zip)
+  def self.email(from_email_id, to_email_id, cc_email_id, prj_name, build_zip)
     Mail.defaults do
       delivery_method :smtp, {:address => 'smtp.sendgrid.net',
                               :port => 587,
@@ -27,9 +27,10 @@ class Utility
     end
 
     mail = Mail.new do
-      to [email_id.to_s]
-      from 'vtr@weboniselab.com'
-      subject Time.now.to_s + 'Test - Automation Script Result'
+      from [from_email_id.to_s]
+      to [to_email_id.to_s]
+      cc [cc_email_id.to_s]
+      subject Time.now.to_s + prj_name +' Test - Automation Script Result'
 
       html_part do
         content_type 'text/html; charset=UTF-8'

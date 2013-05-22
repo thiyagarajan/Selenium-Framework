@@ -1,5 +1,7 @@
 mode: <local or remote>
 base_url:
+adminbase_url:
 application_name: <application name>
 local_browser: <firefox> OR <chrome> OR <safari> OR <ie>
 browsers: <firefox>, <chrome>, <safari>, <ie>
+host: <remote ip address>

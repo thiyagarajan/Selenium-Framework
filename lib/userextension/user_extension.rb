@@ -94,9 +94,9 @@ class UserExtension
 
   # Call this function this way "generate_words(number)".
   # This function will generate words and return it.
-  def self.generate_words(number)
-    words = Faker::Lorem.words(number).map { |i| i.to_s }.join(" ")
-    return words
+  def self.generate_word
+    word = RandomWord.adjs.next
+    return word
   end
 
   # Call this function this way "generate_sentence".
@@ -214,6 +214,17 @@ class UserExtension
       end
     else
       day = rand(1..30)
+    end
+  end
+
+  def self.load_link(waittime)
+    begin
+      Timeout::timeout(waittime) do
+        yield
+      end
+    rescue Timeout::Error => e
+      puts "Page load timed out: #{e}"
+      retry
     end
   end
 
