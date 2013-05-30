@@ -57,6 +57,32 @@ class UserExtension
     return date.strftime("%d-%m-%Y")
   end
 
+  def self.generate_year(yrs_old)
+    current_year = Time.now.year
+    year= rand(current_year-100..current_year-yrs_old)
+    return year
+  end
+
+  def self.generate_month
+    month = %w{January February March April May June July August September October November December}.sample
+    return month
+  end
+
+  def self.generate_day(month, year)
+    if month=='January' || month=='March' || month=='May' || month =='July' || month == 'August' || month=='October' || month == 'December'
+      day = rand(1..31)
+    elsif month== 'Febaury'
+      if ((year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0))
+        day = rand(1..29)
+      else
+        day = rand(1..28)
+      end
+    else
+      day = rand(1..30)
+    end
+    return day
+  end
+
   # Call this function this way "generate_alphanumeric_string(length)".
   # This function will generate a random alpha-numeric string and return it.
   def self.generate_alphanumeric_string(length)

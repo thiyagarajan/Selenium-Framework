@@ -4,13 +4,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-framework}
-  s.version = '1.0.11'
-  s.date = %q{2013-05-22}
+  s.version = '1.0.13'
+  s.date = %q{2013-05-30}
   s.default_executable = %q{testframe}
   s.summary = %q{This gem is used for selenium automation framework}
   s.description = %q{This gem is used for selenium automation framework}
-  s.authors = ['Suyog Sakegaonkar, Thiyagarajan Veluchamy']
-  s.email = 'suyogsakegaonka@gmail.com, thiyagarajannv@gmail.com'
+  s.authors = ['Webonise Lab']
+  s.email = 'support@weboniselab.com'
   s.files = ['lib/userextension/user_extension.rb', 'lib/selenium-framework.rb', 'bin/copyfiles/Gemfile', 'bin/copyfiles/selenium-framework.yml', 'bin/copyfiles/include.rb', 'bin/copyfiles/project_file.rb', 'lib/userextension/pre_requisite.rb', 'lib/userextension/utilities.rb']
   s.require_path = 'lib'
   s.executables << 'testframe'
