@@ -87,4 +87,4 @@ In configure/selenium_framework.yml you will need to define the application
 
 == Copyright
 
-Copyright (c) 2013 Webonise Lab Pvt Ltd. See LICENSE for details.
+Copyright (c) 2013. See LICENSE for details.
