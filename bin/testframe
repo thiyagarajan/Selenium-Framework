@@ -2,10 +2,8 @@
 require 'fileutils'
 require 'readline'
 
-
 def print_path(filename, filepath, project_directory_path)
-  path = filepath +'/'+ filename
-  path = path.to_s
+  path = filepath +'/'+ filename.to_s
   puts 'create ' + path.split(project_directory_path.to_s)[1].to_s
 end
 
@@ -28,7 +26,7 @@ def help_text
   exit
 end
 
-internal_dir = ['libraries', 'testcases','config','builds']
+internal_dir = ['libraries', 'testcases', 'config', 'builds', 'testdata']
 
 if ARGV[0] == nil || ARGV[1] == nil || (ARGV[0] !='new' && ARGV[0] !='update') || ARGV[0] == '-h' || ARGV[0] == '--help'
   help_text
@@ -51,7 +49,6 @@ if ARGV[0] == 'update'
     help_text
   end
 end
-
 
 project_name = ARGV[1]
 project_directory_path = Dir.pwd
@@ -100,8 +97,6 @@ if exist_flag == 1 && update_flag == 0
   print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
 
   Dir.chdir(project_directory_path)
-# internal_dir -- array for storing framework directory names
-#  internal_dir = ['libraries', 'testcases','config','builds']
   directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
   for dir_counter in 0..internal_dir.length-1
@@ -115,6 +110,16 @@ if exist_flag == 1 && update_flag == 0
   FileUtils.copy_file(source, destination)
   Dir.chdir(project_directory_path)
   print_path('config/selenium-framework.yml', project_directory_path + '/' + project_name, project_directory_path)
+
+  Dir.entries(File.expand_path File.dirname(__FILE__).to_s + '/testdata').select { |f| !File.directory? f }.each do |file_name|
+    Dir.chdir(project_directory_path + '/' + project_name + '/testdata')
+    FileUtils.touch file_name
+    source = File.expand_path File.dirname(__FILE__).to_s + "/testdata/#{file_name}"
+    destination = project_directory_path + '/' + project_name + "/testdata/#{file_name}"
+    FileUtils.copy_file(source, destination)
+    Dir.chdir(project_directory_path)
+    print_path("testdata/#{file_name}", project_directory_path + '/' + project_name, project_directory_path)
+  end
 
   puts "\nFramework for #{project_name} is created..."
   puts "\nbundle install"
@@ -159,8 +164,6 @@ if exist_flag == 2
   print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
 
   Dir.chdir(project_directory_path)
-# internal_dir -- array for storing framework directory names
-#  internal_dir = ['libraries', 'testcases','config','builds']
   directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
   for dir_counter in 0..internal_dir.length-1
@@ -174,6 +177,16 @@ if exist_flag == 2
   FileUtils.copy_file(source, destination)
   Dir.chdir(project_directory_path)
   print_path('config/selenium-framework.yml', project_directory_path + '/' + project_name, project_directory_path)
+
+  Dir.entries(File.expand_path File.dirname(__FILE__).to_s + '/testdata').select { |f| !File.directory? f }.each do |file_name|
+    Dir.chdir(project_directory_path + '/' + project_name + '/testdata')
+    FileUtils.touch file_name
+    source = File.expand_path File.dirname(__FILE__).to_s + "/testdata/#{file_name}"
+    destination = project_directory_path + '/' + project_name + "/testdata/#{file_name}"
+    FileUtils.copy_file(source, destination)
+    Dir.chdir(project_directory_path)
+    print_path("testdata/#{file_name}", project_directory_path + '/' + project_name, project_directory_path)
+  end
 
   puts "\nFramework for #{project_name} is created..."
   puts "\nbundle install"
@@ -217,8 +230,6 @@ if exist_flag == 3
     end
 
     Dir.chdir(project_directory_path)
-# internal_dir -- array for storing framework directory names
-#    internal_dir = ['libraries', 'testcases','config','builds']
     directory_path = project_directory_path + "/" + project_name
 # dir_counter -- iterator for the loop
     for dir_counter in 0..internal_dir.length-1
@@ -308,7 +319,6 @@ if update_flag ==1
       present_flag = destination_data.include? thing
       present_flag = present_flag.to_s
       if ("false".casecmp present_flag) == 0
-        #File.open(destination, 'a+') { |file| file.write(thing.to_s) }
         f = File.open(destination, "r+")
         lines = f.readlines
         f.close
@@ -318,10 +328,10 @@ if update_flag ==1
         output.close
       end
     end
-    print_path("Gemfile", project_directory_path + "/" + project_name, project_directory_path)
+    print_path('Gemfile', project_directory_path + '/' + project_name, project_directory_path)
 
-    source = File.expand_path File.dirname(__FILE__).to_s + "/copyfiles/selenium-framework.yml"
-    destination = "/config/selenium-framework.yml"
+    source = File.expand_path File.dirname(__FILE__).to_s + '/copyfiles/selenium-framework.yml'
+    destination = '/config/selenium-framework.yml'
     source_data = Array.new
     source_data = IO.readlines(source)
     destination_data = Array.new
@@ -329,23 +339,22 @@ if update_flag ==1
     source_data.each do |thing|
       present_flag = destination_data.include? thing
       present_flag = present_flag.to_s
-      if ("false".casecmp present_flag) == 0
-        #File.open(destination, 'a+') { |file| file.write(thing.to_s) }
-        f = File.open(destination, "r+")
+      if ('false'.casecmp present_flag) == 0
+        f = File.open(destination, 'r+')
         lines = f.readlines
         f.close
         lines = [thing] + lines
-        output = File.new(destination, "w")
+        output = File.new(destination, 'w')
         lines.each { |line| output.write line }
         output.close
       end
     end
-    print_path("/config/selenium-framework.yml", project_directory_path + "/" + project_name, project_directory_path)
+    print_path('/config/selenium-framework.yml', project_directory_path + '/' + project_name, project_directory_path)
 
     puts "\nFramework for #{project_name} is updated..."
     puts "\nbundle install"
-    Dir.chdir(project_directory_path + "/" + project_name)
-    system("bundle install")
+    Dir.chdir(project_directory_path + '/' + project_name)
+    system('bundle install')
     Dir.chdir(project_directory_path)
   end
 end

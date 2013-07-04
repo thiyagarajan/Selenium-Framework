@@ -13,3 +13,8 @@ require 'fileutils'
 require 'xmlsimple'
 require 'ostruct'
 require 'random-word'
+Dir.chdir('testcases')
+Dir['**/*'].reject { |fn| File.directory?(fn) }.each do |r|
+  require '../testcases/'+r
+end
+Dir.chdir('..')

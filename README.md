@@ -53,11 +53,11 @@ In configure/selenium_framework.yml you will need to define the application
    end
 
 == Save the screenshot
-   include the below line wherever requiered and change the file name as you wish
-   $driver.save_screenshot($screenshot_directory_path+'/'+test_id.to_s+'-pass.png')
+   * include the below line wherever requiered and change the file name as you wish
+   * $driver.save_screenshot($screenshot_directory_path+'/'+test_id.to_s+'-pass.png')
 
 == Report the testcase status
-   UserExtension.write_result_to_csv($report_file, test_id, 'google search', 'PASS', '')
+   * UserExtension.write_result_to_csv($report_file, test_id, 'google search', 'PASS', '')
 
 == Report the log
    def self.google(test_id)
@@ -80,7 +80,7 @@ In configure/selenium_framework.yml you will need to define the application
 
    
 == Selenium Setup
-Download the latest version of selenium grid from http://seleniumhq.org/download/
+* Download the latest version of selenium grid from http://seleniumhq.org/download/
 
 ===Using a Custom Selenium Server
 'java --jar /path/to/your/customer/selenium-server.jar'

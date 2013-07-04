@@ -19,11 +19,10 @@ class Project < Test::Unit::TestCase
     end
     $base_url = $SeleniumConfig['base_url']
     $adminbase_url = $SeleniumConfig['adminbase_url']
+    @accept_next_alert = true
     $driver.manage.timeouts.implicit_wait = 180
     @verification_errors = []
   end
-
-  # Write the testcases here:
 
   def test_zipandmail
     Utility.email($SeleniumConfig['mail_from'], $SeleniumConfig['mail_to'], $SeleniumConfig['mail_cc'], $SeleniumConfig['application_name'], $report_file)
@@ -34,10 +33,32 @@ class Project < Test::Unit::TestCase
     assert_equal [], @verification_errors
   end
 
+  # Write the testcases here:
+
+
+  def element_present?(how, what)
+    @driver.find_element(how, what)
+    true
+  rescue Selenium::WebDriver::Error::NoSuchElementError
+    false
+  end
+
   def verify(&blk)
     yield
   rescue Test::Unit::AssertionFailedError => ex
     @verification_errors << ex
+  end
+
+  def close_alert_and_get_its_text(how, what)
+    alert = @driver.switch_to().alert()
+    if (@accept_next_alert) then
+      alert.accept()
+    else
+      alert.dismiss()
+    end
+    alert.text
+  ensure
+    @accept_next_alert = true
   end
 
 end
