@@ -1,6 +1,5 @@
 = selenium-framework
 
-http://www.github.com/webonise
 Selenium Framework is an Functional Testing Service that transparently distributes your functional tests across multiple operating systems with different versions of all major browsers AND captures a screen shot, Reports, Log. This eliminates the need to have multiple vm's on your computer or the need for multiple machines on your test to test your web application.  Running your tests remotely will dramatically speed up in-browser web testing and leave more time to  and create a slide show available to confirm visuals making it easy for you to improve your web application.
 
 == Install
@@ -76,7 +75,7 @@ In configure/selenium_framework.yml you will need to define the application
 * UserExtension.methods
 * Utility.methods
 * for example using timeout error
-    Utility.load_link(time) { link }
+    UserExtension.load_link(time) { link }
 
    
 == Selenium Setup
